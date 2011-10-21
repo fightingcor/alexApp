@@ -15,8 +15,10 @@ class BooksController extends Zend_Controller_Action
 
     public function listAction()
     {    	
-        $booksTBL = new Model_Books();
+        $booksTBL = new Model_DbTable_Books();
         $this->view->books=$booksTBL->fetchAll();
+		
+		
     }
 
 
