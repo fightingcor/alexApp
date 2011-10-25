@@ -1,4 +1,9 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Books</b> and script/action name <b>index</b></p>
-</div>
+Guestbook Entries: <br />
+
+<dl>
+	<?php 
+	foreach ($$this->entries as $entry) {?>
+		<dt><?=$this->escape($entry->email)?></dt>
+		<dt><?=$this->escape($entry->comment)?></dt>
+	<?php } ?>
+</dl>

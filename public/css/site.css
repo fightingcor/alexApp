@@ -1,0 +1,130 @@
+body,html {
+    margin: 0 auto;
+    font-family: Verdana,sans-serif;
+}
+
+ul {margin:0; padding:0;}
+li {list-style: none;}
+
+h1 { 	
+	padding:5px;
+	font-weight:bold; 
+	font-family:Arial; 
+	color:#FFFF00; 
+	background:#999999; 
+	border-bottom:3px solid #FFFFFF; 
+	margin:0
+}
+h2 { 
+	padding:5px; 	
+	font-weight:bold; 
+	font-family:Arial; 
+	color:#A78049; 
+	background:#666666; 
+	border-bottom:3px solid #FFFFFF; 
+	margin:0
+}
+
+#wrap{
+	width: 1024px;
+	position: absolute;
+}
+
+#logo { 
+	font-family:Arial; 
+	font-size:30px; 
+	color:#FFFFFF; 
+	font-weight:bold; 
+	background:#000000; 	
+	padding:20px
+}
+#page { 
+	position:relative;	
+	overflow:visible;
+	width: 100%;	
+}
+#menu { 
+	position:relative; 
+	padding:20px; 
+	width:200px; 
+	background:#666666; 
+	float:left; 
+	height:auto; 
+}
+
+#menu h1 { 
+	width:190px; 
+	font-size:24px; 	
+}
+
+#menu li { 
+	 width:190px; 
+	 padding:5px; 
+	 border-bottom:1px dotted #FFFFFF; 
+	 font-family:Arial; 
+	 font-size:14px; 
+	 font-weight:bold; 
+	 color:#FFFFFF; 	 
+}
+
+#contents {	
+	position:relative; 
+	padding:20px; 
+	background: #999999; 
+	font-size:12px; 
+	font-family:Verdana; 
+	color:#FFFFFF; 	
+	float:left; 
+	height:auto;
+	width: 744px;
+}
+
+#contents h2 { 	
+	font-size:24px; 	
+}
+
+#text { padding:5px; line-height:150%; font-family:Verdana; text-align:justify}
+
+#footer { 
+	position:relative; 
+	clear:both; 
+	background: #333333; 
+	font-family: Verdana; 
+	font-size:30px; 
+	font-weight:bold; 
+	color:#FFFFFF; 
+	padding:20px;
+}
+
+
+
+
+a:link,
+a:visited
+{
+    color: #0398CA;
+}
+
+/* Table */
+th {
+    text-align: left;
+}
+td, th {
+    padding-right: 5px;
+}
+
+/* style form */
+form dt {
+    width: 100px;
+    display: block;
+    float: left;
+    clear: left;
+}
+form dd {
+    margin-left: 0;
+    float: left;
+    
+}
+form #submitbutton {
+    margin-left: 100px;
+}

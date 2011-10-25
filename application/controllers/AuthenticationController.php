@@ -11,6 +11,7 @@ class AuthenticationController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        $this->_helper->_redirector('login');
     }
 
     public function loginAction()
@@ -22,7 +23,7 @@ class AuthenticationController extends Zend_Controller_Action
 		
 		//check Form validation
 		
-		$form=new Form_LoginForm();
+		$form=new Application_Form_LoginForm();
 		
 		$request=$this->getRequest();
 		if($request->isPost()){
