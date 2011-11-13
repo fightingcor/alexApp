@@ -1,0 +1,20 @@
+<script type="text/javascript" src="/js/jquery-1.7.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#test").click(function(){
+			console.log("test~~~");
+			$.ajax({
+				url:"http://localhost/album/index/",
+				type:"POST",
+				data:"format=json",
+				async:false,
+				success:function(response){
+					alert(response);
+				}
+			});
+		});
+	});
+	
+</script>
+
+<div id="test">testing</div>

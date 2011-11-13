@@ -1,0 +1,137 @@
+<?
+$this->jQuery()->enable()
+	 ->addStylesheet($this->baseUrl().'/css/jquery.countdown.css')
+	 ->addJavascriptFile($this->baseUrl().'/js/jquery.countdown.js');
+?>
+<p style="height:51px;">
+	<span class="listName" id="name1">은광 : </span>
+	<span id="count1"></span>	
+	<span class="cBtn"><input type="button" id="commenceBtn1" value="점령" onclick="commenceActivate(1,'goldLapse');" /></span>
+</p>
+
+<p style="height:51px;">
+	<span class="listName" id="name2">농지 1: </span>
+	<span id="count2"></span>	
+	<span class="cBtn"><input type="button" id="commenceBtn2" value="점령" onclick="commenceActivate(2,'farmLapse');" /></span>
+</p>
+
+<p style="height:51px;">
+	<span class="listName" id="name3">농지 2: </span>
+	<span id="count3"></span>	
+	<span class="cBtn"><input type="button" id="commenceBtn3" value="점령" onclick="commenceActivate(3,'farmLapse');" /></span>
+</p>
+
+<p style="height:51px;">
+	<span class="listName" id="name4">파견 쿨타임: </span>
+	<span id="count4"></span>
+	<span class="cBtn"><input type="button" id="commenceBtn4" value="백호떠라" onclick="commenceActivate(4,'dispatchLapse');" /></span>
+</p>
+
+<span id="addArea"></span>
+
+<p>
+	<span id="insertBtn" style="cursor:pointer;">추가하기</span>
+</p>
+
+<p id="insertDiv">	
+	
+		<label for="newname">타이틀</label><input type="text" name="newtitle" id="newname" />
+		<br />
+		<label for="coolH">쿨시간</label><input type="text" name="newtitle" id="coolH" />
+		<label for="coolM">쿨 분</label><input type="text" name="newtitle" id="coolM" />
+		<label for="coolS">쿨 초</label><input type="text" name="newtitle" id="coolS" />
+		<br />
+		<input type="button" id="reset" value="RESET"/>
+		<input type="button" id="newAdd" value="추가" />
+	
+</p>
+
+
+<script type="text/javascript">
+/*농지 : 4시간 52분*/
+	var farmHour=4;
+	var farmMin=52;
+	var farmSec=0;
+/*금광: 2시간 52분*/	
+	var goldHour=2;
+	var goldMin=52;
+	var goldSec=0;
+/*파견 : 0시간 10분*/	
+	var dispatchMin=10;	
+	
+	var farmLapse=(farmHour*60*60)+(farmMin*60)+farmSec;	
+	var goldLapse=(goldHour*60*60)+(goldMin*60)+goldSec;
+	var dispatchLapse=dispatchMin*60;
+	
+	$('#count1').countdown({until: 0, onTick: highlightLast1});
+	$('#count2').countdown({until: 0, onTick: highlightLast1});
+	$('#count3').countdown({until: 0, onTick: highlightLast1});
+	$('#count4').countdown({until: 0, onTick: highlightLast2});
+	 
+    
+    function highlightLast1(periods) { 
+	    if ($.countdown.periodsToSeconds(periods) == 180) { 
+	        $(this).addClass('highlight'); 
+	    } 
+	} 
+	function highlightLast2(periods) { 
+	    if ($.countdown.periodsToSeconds(periods) == 30) { 
+	        $(this).addClass('highlight'); 
+	    } 
+	} 
+	
+	function  commenceActivate(num, func){
+		$('#count'+num).removeClass('highlight'); 
+		$('#count'+num).countdown('change', {until: eval(func), format: 'HMS'});
+	}
+	
+	function dynamicDel(num){
+		$('#p'+num).remove();
+	}
+	
+	
+	$("#reset").click(function(){
+		$("#newname").val('');
+		$("#coolH").val('');
+		$("#coolM").val('');
+		$("#coolS").val('');
+	});
+	
+	$("#insertBtn").click(function(){
+			var obj=$('#insertDiv').css('display');
+			$('#insertDiv').slideToggle("normal");	
+	});
+	
+	$("#newAdd").live("click", function(){
+		
+		var name=$("#newname").val();
+		var HH=$("#coolH").val()=="" ? 0 : $("#coolH").val();
+		var MM=$("#coolM").val()=="" ? 0 : $("#coolM").val();
+		var ss=$("#coolS").val()=="" ? 0 : $("#coolS").val();
+		
+		var lapse=(parseInt(HH)*60*60)+(parseInt(MM)*60)+parseInt(ss);
+		
+		var step=$("#addArea p").length+5;
+		
+		var str='<p style="height:51px;" id="p'+step+'">'
+				+'<span class="listName" id="name'+step+'">'+name+': </span>'
+				+'<span id="count'+step+'"></span>'
+				+'<span class="cBtn"><input type="button" id="commenceBtn'+step+'" value="확인" onclick="commenceActivate('+step+','+lapse+')"/></span>'
+				+'<input type="button" value="삭제" onclick="dynamicDel('+step+');" />'
+				+'</p>';
+		
+		$("#addArea").append(str);
+		$("#count"+step).countdown({until: 0, onTick: highlightLast1});
+		
+	});
+
+</script>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+<div class="pagination" style="width:100%">
+    
+    <div style="float:right;width:70%;">
+        <!-- First page link -->
+       
+          <?=$this->ajaxLink('Start', $this->url(
+    								array('page' => $this->first)),
+									array('id'=>'start', 
+										  'complete'=>'displayBooks(data)',
+										  'method'=>'post'),
+									array('format'=>'json')
+		);?> |
+           
+        <!-- Previous page link -->    
+        
+        <a href="#" id="previous" page="<?=$this->previous?>">&lt; Previous</a> |
+                
+        <!-- Numbered page links -->
+        <?php foreach ($this->pagesInRange as $page): ?>
+            
+                <a href="#" id="page" page="<?=$page?>"><?= $page; ?></a>
+           
+        <?php endforeach; ?>
+        
+        <!-- Next page link -->
+       
+         | <a href="#" id="next" page="<?=$this->next?>">Next &gt;</a> |
+        
+        
+        <!-- Last page link -->
+       
+        <?=$this->ajaxLink('End', $this->url(
+        								array('page' => $this->last)),
+										array('id'=>'end', 
+											  'complete'=>'displayBooks(data)',
+											  'method'=>'post'),
+										array('format'=>'json')
+		);?>
+       
+        &nbsp; Page <span id="cpage"><?= $this->current; ?></span> of <?= $this->last; ?>
+    </div>
+</div>
+
+
+
+
+
+
+
+

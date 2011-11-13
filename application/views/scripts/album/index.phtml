@@ -1,25 +1,92 @@
 <?php         
 $this->title = "My Albums";
 $this->headTitle($this->title);
+
+//$this->dojo()->enable();
+$this->jQuery()->enable()->addJavascriptFile($this->baseUrl().'/js/frontend.js');
 ?>
 <p><a href="<?php echo $this->url(array('controller'=>'album', 
         'action'=>'add'));?>">Add new album</a></p>
-<table>
+<!-- table>
 <tr>
     <th>Title</th>
     <th>Artist</th>
     <th>&nbsp;</th>
 </tr>
-<?php foreach($this->albums as $album) : ?>
+<?php foreach($this->albums as $album) {?>
 <tr>
-    <td><?php echo $this->escape($album->title);?></td>
-    <td><?php echo $this->escape($album->artist);?></td>
+    <td><?php echo $this->escape($album['title']);?></td>
+    <td><?php echo $this->escape($album['artist']);?></td>
     <td>
         <a href="<?php echo $this->url(array('controller'=>'album', 
-            'action'=>'edit', 'id'=>$album->id));?>">Edit</a>
+            'action'=>'edit', 'id'=>$album['id']));?>">Edit</a>
         <a href="<?php echo $this->url(array('controller'=>'album', 
-            'action'=>'delete', 'id'=>$album->id));?>">Delete</a>
+            'action'=>'delete', 'id'=>$album['id']));?>">Delete</a>
     </td>
 </tr>
-<?php endforeach; ?>
-</table>
+<?php } ?>
+</table -->
+<div id="albumsResponse">
+<?php foreach($this->albums as $album) {
+	echo $this->accordionPane(
+					'albums', 
+					'sang by '. $album['artist'].
+					'<a href="'.$this->url(array(
+						"controller"=>"album",
+						"action"=>"edit", 
+						"id"=>$album['id'])
+					).'">Edit</a>
+        			<a href="'.$this->url(array(
+        				"controller"=>"album", 
+            			"action"=>"delete", 
+            			"id"=>$album['id'])
+					).'">Delete</a>', 
+					array('title'=>$album['title'])
+				);
+}
+	echo $this->accordionContainer(
+					'albums',
+					array('active'=>'none','collapsible'=>'true')
+				);
+	
+?>
+
+</div>
+	
+<?
+//container, pane using dojo
+/*
+echo $this->accordionContainer()->captureStart(
+			'albums',
+			array('duration'=>200),
+			array('style'=>'width:400px; height:200px;')
+);
+
+foreach($this->albums as $album) {
+	echo $this->accordionPane(	
+		'album'.$album->id,
+		'sang by : '.$album->artist,
+		array('title' =>$album->title),
+		array('style'=>'background-color:lightgray;')
+		);	
+}
+echo $this->accordionContainer()->captureEnd('albums');
+*/
+?>
+
+<?echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml')?>
+
+<?=$this->ajaxLink('test',
+					$this->url(array('page'=>'2')), 
+					array('id'=>'test', 'complete'=>'displayBooks(data);', 'method'=>'post'),
+					array('format'=>'json')
+				  );?>
+	
+
+
+
+
+
+
+
+

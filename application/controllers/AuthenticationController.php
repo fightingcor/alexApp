@@ -16,6 +16,7 @@ class AuthenticationController extends Zend_Controller_Action
 
     public function loginAction()
     {
+    	$this->view->title="Login";
     	//check whether user already login
     	if(Zend_Auth::getInstance()->hasIdentity()){
     		$this->_redirect('index/index');
@@ -46,14 +47,14 @@ class AuthenticationController extends Zend_Controller_Action
 					//default getStorage from zend auth instance
 					$authStorage=$auth->getStorage();
 					$authStorage->write($identity);
-					
+					$this->_helper->FlashMessenger("Successful login");					
 					$this->_redirect('index/index');
+					
 				}else{
 					$this->view->errormessage='User name or password is wrong';
 				}
 			}
-		}
-    	
+		}    	
 		$this->view->form=$form;
     }
 

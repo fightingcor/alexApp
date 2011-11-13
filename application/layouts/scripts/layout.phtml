@@ -2,44 +2,58 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Zend Framework Quickstart Application</title>
-  <?php echo $this->headLink()->appendStylesheet('/css/site.css') ?>
+  <?php echo $this->headMeta();?>
+  <?php echo $this->headTitle();?>
+  
+  <?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/site.css') ?>
+    
+  
+  <?php 
+  /*
+  if($this->dojo()->isEnabled()){
+        $this->dojo()->setLocalPath($this->baseUrl().'/js/dojo/dojo/dojo.js')->addStyleSheetModule('dijit.themes.tundra');
+        echo $this->dojo();
+    }*/
+  if($this->jQuery()->isEnabled()){
+  		//echo $this->headScript()->prependFile($this->baseUrl().'/js/frontend.js', 'text/javascript');
+	  
+        $this->jQuery() ->setLocalPath($this->baseUrl().'/js/jquery-1.7.min.js')
+        				->setUiLocalPath($this->baseUrl().'/js/jquery/js/jquery-ui-1.8.16.custom.min.js')
+        				->addStyleSheet('/js/jquery/css/redmond/jquery-ui-1.8.16.custom.css');
+        echo $this->jQuery();
+  }
+  ?>
+    
+  <?//jqueryui.com/redmond download for jquery / css ?>
 </head>
 <body>
 <div id="wrap">
 	<div id="logo">	    
-	        ZF Quickstart Application      
+		<span id="logo_title">ZF Quickstart Application</span>
+	    <span id="logo_login">
+			<?			
+			if(Zend_Auth::getInstance()->hasIdentity()){?>				
+				<?$username=Zend_Auth::getInstance()->getStorage()->read()->username;?>
+				<? echo "welcome :".$username;?>
+				<a href="<?=$this->url(array('controller'=>'authentication', 'action'=>'logout'))?>">LOGOUT</a>
+			<?}else{?>				
+				<a href="<?=$this->url(array('controller'=>'authentication', 'action'=>'login'))?>">LOGIN</a>
+			<?}
+			?>
+		</span>         
 	</div>
 	<div id="page">
-		<div id="menu">
-			<h1>Menu List</h1>			
-			<ul>
-				<li>
-					<a href="<?=$this->url(array('controller'=>'index'), 'default', true)?>">HOME</a>				
-				</li>
-				<li>
-					<a href="<?php 
-	        			echo $this->url(array('controller'=>'guestbook'), 'default', true);
-	        		?>">Guestbook</a>
-	        	</li>
-				<li>
-					<a href="<?php 
-	        			echo $this->url(array('controller'=>'album', 'action'=>'index'));
-	        		?>">Album List</a>
-	        	</li>
-			</ul>
-		</div>
+		<?php echo $this->render('left.php') ?>		
 	
 		<div id="contents">
 			<h2>Page Title : </h2>
-		    <h1><?php echo $this->escape($this->title); ?></h1>
-		<?php echo $this->layout()->content; ?>
+			<?php if(trim($this->title) !="" ){?>
+		    	<h1><?php echo $this->title; ?></h1>
+		    <?}?>
+			<?php echo $this->layout()->content; ?>
 		</div>
-	</div>
-	<div id="footer">
-		Footer area
-	</div>
+	</div>	
+	<?php echo $this->render('footer.php') ?>	
 </div>
 </body>
 </html>

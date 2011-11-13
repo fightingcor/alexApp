@@ -23,9 +23,13 @@ class Application_Model_GuestbookMapper
 		return $this->_dbTable;
 	}
 	
-	public function save(Application_Model_Guestbook $guestbook){
-		$data=array('email'=>$guestbook->getEmail(), 'comment'=>$guestbook->getComment(), 'create'=>date('Y-m-d H:i:s'),);
-		if($id=$guestbook->getId()===null){
+	public function save(Application_Model_GuestbookDTO $guestbookDTO){
+		$data=array(
+				'email'=>$guestbookDTO->getEmail(), 
+				'comment'=>$guestbookDTO->getComment(), 
+				'created'=>date('Y-m-d H:i:s'),
+			);
+		if($id=$guestbookDTO->getId()===null){
 			unset($data['id']);
 			$this->getDbTable()->insert($data);
 		}else{
@@ -33,16 +37,16 @@ class Application_Model_GuestbookMapper
 		}
 	}
 	
-	public function find($id, Application_Model_Guestbook $guestbook){
+	public function find($id, Application_Model_GuestbookDTO $guestbookDTO){
 		$result=$this->getDbTable()->find($id);
 		if(count($result)==0){
 			return;
 		}
 		$row=$result->current();
-		$guestbook  ->setId($row->id)
-					->setEmail($row->email)
-					->setComment($row->comment)
-					->setCreated($row-created);		
+		$guestbookDTO   ->setId($row->id)
+						->setEmail($row->email)
+						->setComment($row->comment)
+						->setCreated($row-created);		
 	}
 	
 	public function fetchAll(){
@@ -50,7 +54,7 @@ class Application_Model_GuestbookMapper
 		$entries=array();
 		
 		foreach ($resultSet as $row) {
-			$entry=new Application_Model_Guestbook();
+			$entry=new Application_Model_GuestbookDTO();
 			$entry  ->setId($row->id)
 					->setEmail($row->email)
 					->setComment($row->comment)

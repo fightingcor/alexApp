@@ -1,9 +1,11 @@
+<?$this->jQuery()->enable();?>
+
 Guestbook Entries: <br />
 
 <dl>
 	<?php 
-	foreach ($$this->entries as $entry) {?>
-		<dt><?=$this->escape($entry->email)?></dt>
-		<dt><?=$this->escape($entry->comment)?></dt>
+	foreach ($this->books as $key => $value){?>
+		<dt><?php echo $value->title;?></dt>
+		<dt><?php echo $value->author;?></dt>
 	<?php } ?>
 </dl>

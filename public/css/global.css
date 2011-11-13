@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* 기초설정 */
+html{margin: 0;padding: 0;}
+
+body
+{
+	font-family: "돋움", "굴림", "Verdana", "Arial"; 
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	color: #666;	
+}
+
+img{margin: 0;padding: 0;	border:none;vertical-align: top;}
+
+select,input,textarea,table{font-size: 1em;}
+
+form{margin: 0;padding: 0;}
+
+em{font-style: normal;}
+
+/* 링크설정 */
+a {color: #666;text-decoration: none;}
+a:hover {color: #666;text-decoration: none;}
+a:visited {color: #666;text-decoration: none;}
+
+a img{margin: 0 0 0 0;padding: 0 0 0 0;border: none;}
+
+/* 목록설정 */
+ul, ul.li
+{
+	font-size: 1em;
+	/*text-align: justify;*/
+	list-style-type: none;
+	padding: 0;
+}
+
+ol, ol.li
+{
+	font-size: 1em;
+	/*text-align: justify;*/
+}
+
+
+/* 표양식 설정 */
+table{font-size: 1em;}
+
